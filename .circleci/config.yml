@@ -170,8 +170,8 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
     environment:
-      INTEGRATION_MAX_PARALLEL_FORKS: 3
-      INTEGRATION_MAX_HEAP_SIZE: "3600M"
+      INTEGRATION_MAX_PARALLEL_FORKS: 2
+      INTEGRATION_MAX_HEAP_SIZE: "3000M"
     resource_class: large
     steps:
       - install_common
@@ -183,7 +183,7 @@ jobs:
       - attach_workspace:
           at: cassandra-tarballs
       - run: ./scripts/install-shaded-dtest-jar-local.sh
-      - run: ./gradlew --no-daemon -PdtestVersion=4.0.16 -PtarballVersion=4.0 -Dcassandra.sidecar.versions_to_test="4.0" jar integrationTestHeavyWeight --stacktrace
+      - run: ./gradlew --no-daemon --max-workers=2 -PdtestVersion=4.0.16 -PtarballVersion=4.0 -Dcassandra.sidecar.versions_to_test="4.0" jar integrationTestHeavyWeight --stacktrace
       - save_gradle_cache
 
       - store_artifacts:
@@ -229,8 +229,8 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
     environment:
-      INTEGRATION_MAX_PARALLEL_FORKS: 3
-      INTEGRATION_MAX_HEAP_SIZE: "3600M"
+      INTEGRATION_MAX_PARALLEL_FORKS: 2
+      INTEGRATION_MAX_HEAP_SIZE: "3000M"
     resource_class: large
     steps:
       - install_common
@@ -242,7 +242,7 @@ jobs:
       - attach_workspace:
           at: cassandra-tarballs
       - run: ./scripts/install-shaded-dtest-jar-local.sh
-      - run: ./gradlew --no-daemon -PdtestVersion=5.0.3 -PtarballVersion=5.0 -Dcassandra.sidecar.versions_to_test="5.0" jar integrationTestHeavyWeight --stacktrace
+      - run: ./gradlew --no-daemon --max-workers=2 -PdtestVersion=5.0.3 -PtarballVersion=5.0 -Dcassandra.sidecar.versions_to_test="5.0" jar integrationTestHeavyWeight --stacktrace
       - save_gradle_cache
 
       - store_artifacts:
@@ -288,8 +288,8 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
     environment:
-      INTEGRATION_MAX_PARALLEL_FORKS: 3
-      INTEGRATION_MAX_HEAP_SIZE: "3600M"
+      INTEGRATION_MAX_PARALLEL_FORKS: 2
+      INTEGRATION_MAX_HEAP_SIZE: "3000M"
     resource_class: large
     steps:
       - install_common
@@ -301,7 +301,7 @@ jobs:
       - attach_workspace:
           at: cassandra-tarballs
       - run: ./scripts/install-shaded-dtest-jar-local.sh
-      - run: ./gradlew --no-daemon -PdtestVersion=5.1 -PtarballVersion=5.1 -Dcassandra.sidecar.versions_to_test="5.1" jar integrationTestHeavyWeight --stacktrace
+      - run: ./gradlew --no-daemon --max-workers=2 -PdtestVersion=5.1 -PtarballVersion=5.1 -Dcassandra.sidecar.versions_to_test="5.1" jar integrationTestHeavyWeight --stacktrace
       - save_gradle_cache
 
       - store_artifacts:
